@@ -10,14 +10,14 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "car_name")
     private String name;
 
-    @Column
+    @Column(name = "car_series")
     private int series;
 
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(referencedColumnName = "id")
     User user;
 
     public Car() {

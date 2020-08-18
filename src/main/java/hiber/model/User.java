@@ -29,6 +29,7 @@ public class User {
       this.lastName = lastName;
       this.email = email;
       this.car = car;
+      car.setUser(this);
    }
 
    public Car getCar() {
@@ -39,8 +40,20 @@ public class User {
       this.car = car;
    }
 
+   public Long getCarId() {
+      return car.getId();
+   }
+
+   public String getCarName() {
+      return car.getName();
+   }
+
    public void setCarName(String carName) {
       car.setName(carName);
+   }
+
+   public int getCarSeries() {
+      return car.getSeries();
    }
 
    public void setCarSeries(int series) {
@@ -78,4 +91,5 @@ public class User {
    public void setEmail(String email) {
       this.email = email;
    }
+
 }
