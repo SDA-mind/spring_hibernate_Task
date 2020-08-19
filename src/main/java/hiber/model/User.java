@@ -1,6 +1,7 @@
 package hiber.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -19,12 +20,13 @@ public class User {
    @Column(name = "email")
    private String email;
 
-   @OneToOne(cascade=CascadeType.ALL, orphanRemoval = true)
+   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
    private Car car;
 
-   public User() {}
-   
-   public User(String firstName, String lastName, String email,Car car) {
+   public User() {
+   }
+
+   public User(String firstName, String lastName, String email, Car car) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
@@ -90,6 +92,30 @@ public class User {
 
    public void setEmail(String email) {
       this.email = email;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (!(o instanceof User)) return false;
+      User user = (User) o;
+      return Objects.equals(getId(), user.getId()) &&
+              Objects.equals(getFirstName(), user.getFirstName()) &&
+              Objects.equals(getLastName(), user.getLastName()) &&
+              Objects.equals(getEmail(), user.getEmail()) &&
+              Objects.equals(getCar(), user.getCar());
+   }
+
+   @Override
+   public int hashCode() {
+      final int x = 31;
+      int result = 1;
+      result = result * x + (int) getId().longValue();
+      result = result * x + getFirstName().hashCode();
+      result = result * x + getLastName().hashCode();
+      result = result * x + getEmail().hashCode();
+      result = result * x + getCar().hashCode();
+      return result;
    }
 
 }

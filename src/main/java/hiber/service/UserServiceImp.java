@@ -29,7 +29,7 @@ public class UserServiceImp implements UserService {
 
    @Transactional(readOnly = true)
    @Override
-   public User selectedUser(Long id, int series) {
+   public User selectedUser(Long id, Integer series) {
       return userDao.selectedUser(id, series);
    }
 

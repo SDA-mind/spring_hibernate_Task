@@ -5,10 +5,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Queue;
 
 @Repository
 public class UserDaoImp implements UserDao {
@@ -24,16 +22,19 @@ public class UserDaoImp implements UserDao {
    @Override
    @SuppressWarnings("unchecked")
    public List<User> listUsers() {
-      TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
+      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
       return query.getResultList();
    }
 
    @Override
-   public User selectedUser(Long id, int series) {
-   Query query = sessionFactory.getCurrentSession().createQuery("select User from User as u join u.car as c WHERE c.id = :id and c.series = :series")
-           .setParameter("id",id)
-           .setParameter("series",series);
-   return (User) query.getSingleResult();
+   @SuppressWarnings("unchecked")
+   public User selectedUser(Long id, Integer series) {
+      User user = sessionFactory.getCurrentSession()
+              .createQuery("SELECT u from User as u WHERE u.car.id = :id and u.car.series = :series", User.class)
+              .setParameter("id", id)
+              .setParameter("series", series)
+              .getSingleResult();
+      return user;
    }
 
 }

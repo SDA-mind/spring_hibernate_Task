@@ -7,5 +7,5 @@ import java.util.List;
 public interface UserDao {
    void add(User user);
    List<User> listUsers();
-   User selectedUser(Long id, int series);
+   User selectedUser(Long id, Integer series);
 }
