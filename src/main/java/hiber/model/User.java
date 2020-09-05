@@ -118,4 +118,15 @@ public class User {
       return result;
    }
 
+   @Override
+   public String toString() {
+      return "User: " +
+              "id=" + id + "," + "\n" +
+              "firstName='" + firstName + "," + "\n" +
+              "lastName='" + lastName + "," + "\n" +
+              "email='" + email + "," + "\n" +
+              "Car_id=" + car.getId() + "," + "\n" +
+              "Car_name = " + car.getName() + "," + "\n" +
+              "Car_series = " + car.getSeries() + ".";
+   }
 }
